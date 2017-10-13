@@ -1,0 +1,1748 @@
+Last login: Wed Jan 18 10:46:15 on ttys001
+US-IT00205:~ koyuki.nakamori$ cd 17-01
+-bash: cd: 17-01: No such file or directory
+US-IT00205:~ koyuki.nakamori$ cd 17-01-DS-SF/
+US-IT00205:17-01-DS-SF koyuki.nakamori$ cd sql
+US-IT00205:sql koyuki.nakamori$ psql -h
+-bash: psql: command not found
+US-IT00205:sql koyuki.nakamori$ vi ~/.bash_profile
+US-IT00205:sql koyuki.nakamori$ source!$
+source~/.bash_profile
+-bash: source~/.bash_profile: No such file or directory
+US-IT00205:sql koyuki.nakamori$ source ~/.bash_profile
+US-IT00205:sql koyuki.nakamori$ psql
+Password: 
+psql: FATAL:  password authentication failed for user "koyuki.nakamori"
+US-IT00205:sql koyuki.nakamori$ psql -h
+psql: option requires an argument -- h
+Try "psql --help" for more information.
+US-IT00205:sql koyuki.nakamori$ psql --help
+psql is the PostgreSQL interactive terminal.
+
+Usage:
+  psql [OPTION]... [DBNAME [USERNAME]]
+
+General options:
+  -c, --command=COMMAND    run only single command (SQL or internal) and exit
+  -d, --dbname=DBNAME      database name to connect to (default: "koyuki.nakamori")
+  -f, --file=FILENAME      execute commands from file, then exit
+  -l, --list               list available databases, then exit
+  -v, --set=, --variable=NAME=VALUE
+                           set psql variable NAME to VALUE
+                           (e.g., -v ON_ERROR_STOP=1)
+  -V, --version            output version information, then exit
+  -X, --no-psqlrc          do not read startup file (~/.psqlrc)
+  -1 ("one"), --single-transaction
+                           execute as a single transaction (if non-interactive)
+  -?, --help[=options]     show this help, then exit
+      --help=commands      list backslash commands, then exit
+      --help=variables     list special variables, then exit
+
+Input and output options:
+  -a, --echo-all           echo all input from script
+  -b, --echo-errors        echo failed commands
+  -e, --echo-queries       echo commands sent to server
+  -E, --echo-hidden        display queries that internal commands generate
+  -L, --log-file=FILENAME  send session log to file
+  -n, --no-readline        disable enhanced command line editing (readline)
+  -o, --output=FILENAME    send query results to file (or |pipe)
+  -q, --quiet              run quietly (no messages, only query output)
+  -s, --single-step        single-step mode (confirm each query)
+  -S, --single-line        single-line mode (end of line terminates SQL command)
+
+Output format options:
+  -A, --no-align           unaligned table output mode
+  -F, --field-separator=STRING
+                           field separator for unaligned output (default: "|")
+  -H, --html               HTML table output mode
+  -P, --pset=VAR[=ARG]     set printing option VAR to ARG (see \pset command)
+  -R, --record-separator=STRING
+                           record separator for unaligned output (default: newline)
+  -t, --tuples-only        print rows only
+  -T, --table-attr=TEXT    set HTML table tag attributes (e.g., width, border)
+  -x, --expanded           turn on expanded table output
+  -z, --field-separator-zero
+                           set field separator for unaligned output to zero byte
+  -0, --record-separator-zero
+                           set record separator for unaligned output to zero byte
+
+Connection options:
+  -h, --host=HOSTNAME      database server host or socket directory (default: "local socket")
+  -p, --port=PORT          database server port (default: "5432")
+  -U, --username=USERNAME  database user name (default: "koyuki.nakamori")
+  -w, --no-password        never prompt for password
+  -W, --password           force password prompt (should happen automatically)
+
+For more information, type "\?" (for internal commands) or "\help" (for SQL
+commands) from within psql, or consult the psql section in the PostgreSQL
+documentation.
+
+Report bugs to <pgsql-bugs@postgresql.org>.
+US-IT00205:sql koyuki.nakamori$ psql -p 5433
+psql (9.6.1)
+Type "help" for help.
+
+koyuki.nakamori=# \q
+US-IT00205:sql koyuki.nakamori$ psql -p 5433
+psql (9.6.1)
+Type "help" for help.
+
+koyuki.nakamori=# CREATE DATABASE readychef;
+CREATE DATABASE
+koyuki.nakamori=# \q
+US-IT00205:sql koyuki.nakamori$ cd data
+-bash: cd: data: No such file or directory
+US-IT00205:sql koyuki.nakamori$ psql -p 5433 readychef < readychef.sql
+SET
+SET
+SET
+SET
+SET
+SET
+CREATE EXTENSION
+COMMENT
+SET
+SET
+SET
+CREATE TABLE
+ALTER TABLE
+CREATE TABLE
+ALTER TABLE
+CREATE TABLE
+ALTER TABLE
+CREATE TABLE
+ALTER TABLE
+CREATE TABLE
+ALTER TABLE
+COPY 318120
+COPY 1993
+COPY 2157
+COPY 5524
+COPY 514281
+REVOKE
+REVOKE
+GRANT
+GRANT
+US-IT00205:sql koyuki.nakamori$ psql readychef
+Password: 
+psql: FATAL:  password authentication failed for user "koyuki.nakamori"
+US-IT00205:sql koyuki.nakamori$ psql -p 5433 readychef
+psql (9.6.1)
+Type "help" for help.
+
+readychef=# \d
+           List of relations
+ Schema |   Name    | Type  |  Owner   
+--------+-----------+-------+----------
+ public | events    | table | postgres
+ public | meals     | table | postgres
+ public | referrals | table | postgres
+ public | users     | table | postgres
+ public | visits    | table | postgres
+(5 rows)
+
+readychef=# \d readychef 
+Did not find any relation named "readychef".
+readychef=# SELECT * FROM EVENTS LIMIT 10
+readychef-# TABLE event 
+readychef-# SELECT COUNT(*) FROM users;
+ERROR:  syntax error at or near "TABLE"
+LINE 2: TABLE event 
+        ^
+readychef=# TABLE event;
+ERROR:  relation "event" does not exist
+LINE 1: TABLE event;
+              ^
+readychef=# SELECT * FROM events LIMIT 10;
+     dt     | userid | meal_id | event  
+------------+--------+---------+--------
+ 2013-01-01 |      3 |      18 | bought
+ 2013-01-01 |      7 |       1 | like
+ 2013-01-01 |     10 |      29 | bought
+ 2013-01-01 |     11 |      19 | share
+ 2013-01-01 |     15 |      33 | like
+ 2013-01-01 |     18 |       4 | share
+ 2013-01-01 |     18 |      40 | bought
+ 2013-01-01 |     21 |      10 | share
+ 2013-01-01 |     21 |       4 | like
+ 2013-01-01 |     22 |      23 | bought
+(10 rows)
+
+readychef=# SELECT * FROM meals  LIMIT 10;
+ meal_id |  type   |     dt     | price 
+---------+---------+------------+-------
+       1 | french  | 2013-01-01 |    10
+       2 | chinese | 2013-01-01 |    13
+       3 | mexican | 2013-01-02 |     9
+       4 | italian | 2013-01-03 |     9
+       5 | chinese | 2013-01-03 |    12
+       6 | italian | 2013-01-03 |     9
+       7 | italian | 2013-01-03 |    10
+       8 | french  | 2013-01-03 |    14
+       9 | italian | 2013-01-03 |    13
+      10 | french  | 2013-01-03 |     7
+(10 rows)
+
+readychef=# SELECT * FROM referreals  LIMIT 10;
+ERROR:  relation "referreals" does not exist
+LINE 1: SELECT * FROM referreals  LIMIT 10;
+                      ^
+readychef=# SELECT * FROM referreals LIMIT 10;
+ERROR:  relation "referreals" does not exist
+LINE 1: SELECT * FROM referreals LIMIT 10;
+                      ^
+readychef=# SELECT * from referrals LIMIT 10;
+ referred | referred_by 
+----------+-------------
+       54 |          44
+      158 |          80
+      184 |         139
+      263 |         107
+      275 |          35
+      279 |           6
+      298 |         167
+      305 |          59
+      311 |          80
+      330 |         289
+(10 rows)
+
+readychef=# SELECT * from users LIMIT 10;
+ userid |     dt     | campaign_id 
+--------+------------+-------------
+      1 | 2013-01-01 | RE
+      2 | 2013-01-01 | PI
+      3 | 2013-01-01 | FB
+      4 | 2013-01-01 | FB
+      5 | 2013-01-01 | FB
+      6 | 2013-01-01 | FB
+      7 | 2013-01-01 | PI
+      8 | 2013-01-01 | FB
+      9 | 2013-01-01 | FB
+     10 | 2013-01-01 | TW
+(10 rows)
+
+readychef=# SELECT * from visits LIMIT 10;
+     dt     | userid 
+------------+--------
+ 2013-01-01 |      3
+ 2013-01-01 |      7
+ 2013-01-01 |      8
+ 2013-01-01 |     10
+ 2013-01-01 |     11
+ 2013-01-01 |     15
+ 2013-01-01 |     18
+ 2013-01-01 |     19
+ 2013-01-01 |     20
+ 2013-01-01 |     21
+(10 rows)
+
+readychef=# SELECT DISTINCT * FROM  users WHERE campaign_id='FB' LIMIT 10;
+ userid |     dt     | campaign_id 
+--------+------------+-------------
+   2440 | 2013-06-07 | FB
+   3056 | 2013-07-15 | FB
+   4117 | 2013-09-26 | FB
+   5167 | 2013-12-06 | FB
+   1417 | 2013-04-02 | FB
+    482 | 2013-02-01 | FB
+   4113 | 2013-09-26 | FB
+     12 | 2013-01-01 | FB
+   3530 | 2013-08-14 | FB
+   4743 | 2013-11-05 | FB
+(10 rows)
+
+readychef=# SELECT COUNT(*) FROM users;
+ count 
+-------
+  5524
+(1 row)
+
+readychef=# SELECT COUNT(DISTINCT *) FROM users;
+ERROR:  syntax error at or near "*"
+LINE 1: SELECT COUNT(DISTINCT *) FROM users;
+                              ^
+readychef=# SELECT COUNT(DISTINCT userid) FROM users;
+ count 
+-------
+  5524
+(1 row)
+
+readychef=# SELECT MAX(price) FROM meals;
+ max 
+-----
+  16
+(1 row)
+
+readychef=# SELECT MIN(price) FROM meals;
+ min 
+-----
+   6
+(1 row)
+
+readychef=# SELECT AVG(price) FROM meals;
+         avg         
+---------------------
+ 10.6522829904666332
+(1 row)
+
+readychef=# SELECT type, AVG(price), MIN(price), MAX(price) FROM meals;
+ERROR:  column "meals.type" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT type, AVG(price), MIN(price), MAX(price) FROM meals;
+               ^
+readychef=# SELECT DISTINCT type, AVG(price), MIN(price), MAX(price) FROM meals group by type;
+    type    |         avg         | min | max 
+------------+---------------------+-----+-----
+ chinese    |  9.5187165775401070 |   6 |  13
+ french     | 11.5420000000000000 |   7 |  16
+ italian    | 11.2926136363636364 |   7 |  16
+ japanese   |  9.3804878048780488 |   6 |  13
+ mexican    |  9.6975945017182131 |   6 |  13
+ vietnamese |  9.2830188679245283 |   6 |  13
+(6 rows)
+
+readychef=# SELECT DISTINCT type, AVG(price) as avg_price, MIN(price) as min_price, MAX(price) as max_price FROM meals group by type;
+    type    |      avg_price      | min_price | max_price 
+------------+---------------------+-----------+-----------
+ chinese    |  9.5187165775401070 |         6 |        13
+ french     | 11.5420000000000000 |         7 |        16
+ italian    | 11.2926136363636364 |         7 |        16
+ japanese   |  9.3804878048780488 |         6 |        13
+ mexican    |  9.6975945017182131 |         6 |        13
+ vietnamese |  9.2830188679245283 |         6 |        13
+(6 rows)
+
+readychef=# SELECT DISTINCT type, AVG(price) as avg_price, MIN(price) as min_price, MAX(price) as max_price FROM meals WHERE date_part('month', dt) <= 3 AND date_part('year',dt)=2013 group by type;
+    type    |      avg_price      | min_price | max_price 
+------------+---------------------+-----------+-----------
+ chinese    |  9.7727272727272727 |         6 |        13
+ french     | 11.7522123893805310 |         7 |        16
+ italian    | 11.0877192982456140 |         7 |        16
+ japanese   |  9.6521739130434783 |         6 |        13
+ mexican    |  9.6951219512195122 |         6 |        13
+ vietnamese |  9.3750000000000000 |         6 |        13
+(6 rows)
+
+readychef=# SELECT DISTINCT type, date_part('month', dt) as month, AVG(price) as avg_price, MIN(price) as min_price, MAX(price) as max_price FROM meals WHERE date_part('month', dt) <= 3 AND date_part('year',dt)=2013 group by type;
+ERROR:  column "meals.dt" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: SELECT DISTINCT type, date_part('month', dt) as month, AVG(p...
+                                                 ^
+readychef=# SELECT DISTINCT type, date_part('month', dt) as month, AVG(price) as avg_price, MIN(price) as min_price, MAX(price) as max_price FROM meals WHERE date_part('month', dt) <= 3 AND date_part('year',dt)=2013 group by type, date_part('month', dt);
+    type    | month |      avg_price      | min_price | max_price 
+------------+-------+---------------------+-----------+-----------
+ chinese    |     1 | 11.2307692307692308 |         8 |        13
+ chinese    |     2 |  9.0666666666666667 |         6 |        13
+ chinese    |     3 |  9.2500000000000000 |         6 |        13
+ french     |     1 | 11.6500000000000000 |         7 |        16
+ french     |     2 | 10.8387096774193548 |         7 |        16
+ french     |     3 | 12.5238095238095238 |         8 |        16
+ italian    |     1 | 10.8030303030303030 |         7 |        16
+ italian    |     2 | 11.2666666666666667 |         7 |        16
+ italian    |     3 | 11.2666666666666667 |         7 |        16
+ japanese   |     1 |  9.6153846153846154 |         6 |        13
+ japanese   |     2 |  9.9166666666666667 |         6 |        13
+ japanese   |     3 |  9.5238095238095238 |         6 |        13
+ mexican    |     1 | 10.3823529411764706 |         6 |        13
+ mexican    |     2 |  8.7916666666666667 |         6 |        13
+ mexican    |     3 |  9.6250000000000000 |         6 |        13
+ vietnamese |     1 | 10.8000000000000000 |         6 |        13
+ vietnamese |     2 |  9.6000000000000000 |         7 |        13
+ vietnamese |     3 |  8.8235294117647059 |         6 |        13
+(18 rows)
+
+readychef=# SELECT DISTINCT type, date_part('month', dt) as month, AVG(price) as avg_price, MIN(price) as min_price, MAX(price) as max_price FROM meals WHERE date_part('month', dt) <= 3 AND date_part('year',dt)=2013 group by type, date_part('month', dt) order by date_part('month', dt) DESC;
+    type    | month |      avg_price      | min_price | max_price 
+------------+-------+---------------------+-----------+-----------
+ chinese    |     3 |  9.2500000000000000 |         6 |        13
+ french     |     3 | 12.5238095238095238 |         8 |        16
+ italian    |     3 | 11.2666666666666667 |         7 |        16
+ japanese   |     3 |  9.5238095238095238 |         6 |        13
+ mexican    |     3 |  9.6250000000000000 |         6 |        13
+ vietnamese |     3 |  8.8235294117647059 |         6 |        13
+ chinese    |     2 |  9.0666666666666667 |         6 |        13
+ french     |     2 | 10.8387096774193548 |         7 |        16
+ italian    |     2 | 11.2666666666666667 |         7 |        16
+ japanese   |     2 |  9.9166666666666667 |         6 |        13
+ mexican    |     2 |  8.7916666666666667 |         6 |        13
+ vietnamese |     2 |  9.6000000000000000 |         7 |        13
+ chinese    |     1 | 11.2307692307692308 |         8 |        13
+ french     |     1 | 11.6500000000000000 |         7 |        16
+ italian    |     1 | 10.8030303030303030 |         7 |        16
+ japanese   |     1 |  9.6153846153846154 |         6 |        13
+ mexican    |     1 | 10.3823529411764706 |         6 |        13
+ vietnamese |     1 | 10.8000000000000000 |         6 |        13
+(18 rows)
+
+readychef=# SELECT * FROM event LIMIT 10;
+ERROR:  relation "event" does not exist
+LINE 1: SELECT * FROM event LIMIT 10;
+                      ^
+readychef=# SELECT * FROM events LIMIT 10;
+     dt     | userid | meal_id | event  
+------------+--------+---------+--------
+ 2013-01-01 |      3 |      18 | bought
+ 2013-01-01 |      7 |       1 | like
+ 2013-01-01 |     10 |      29 | bought
+ 2013-01-01 |     11 |      19 | share
+ 2013-01-01 |     15 |      33 | like
+ 2013-01-01 |     18 |       4 | share
+ 2013-01-01 |     18 |      40 | bought
+ 2013-01-01 |     21 |      10 | share
+ 2013-01-01 |     21 |       4 | like
+ 2013-01-01 |     22 |      23 | bought
+(10 rows)
+
+readychef=# SELECT DISTINCT meal_id, SUM(CASE WHEN event ='bought' ELSE 0 END) as total_buys, SUM(CASE WHEN event='like' ELSE 0 END ) as total_likes, SUM(CASE WHEN event='share' THEN 1 ELSE 0 END ) as total_shares from events group by meal_id;
+ERROR:  syntax error at or near "ELSE"
+LINE 1: ...T DISTINCT meal_id, SUM(CASE WHEN event ='bought' ELSE 0 END...
+                                                             ^
+readychef=# SELECT DISTINCT meal_id, SUM(CASE WHEN event ='bought' THEN 1 ELSE 0 END) as total_buys, SUM(CASE WHEN event='like'THEN 1 ELSE 0 END ) as total_likes, SUM(CASE WHEN event='share' THEN 1 ELSE 0 END ) as total_shares from events group by meal_id; 
+ meal_id | total_buys | total_likes | total_shares 
+ meal_id | total_buys | total_likes | total_shares 
+---------+------------+-------------+--------------
+       1 |          0 |           1 |            0
+       3 |          0 |           1 |            0
+       4 |          0 |           1 |            1
+       8 |          1 |           0 |            0
+       9 |          0 |           0 |            1
+      10 |          0 |           0 |            1
+      11 |          1 |           1 |            0
+      12 |          0 |           0 |            2
+      14 |          0 |           2 |            1
+      15 |          2 |           0 |            2
+      18 |          2 |           0 |            0
+      19 |          0 |           0 |            1
+      20 |          0 |           1 |            0
+      21 |          0 |           1 |            1
+      22 |          0 |           1 |            0
+      23 |          1 |           0 |            0
+      24 |          0 |           0 |            2
+      25 |          1 |           2 |            0
+      26 |          1 |           0 |            1
+      27 |          0 |           0 |            2
+      28 |          0 |           3 |            0
+      29 |          2 |           4 |            0
+      30 |          0 |           0 |            1
+      31 |          1 |           3 |            1
+readychef=# 
+readychef=# SELECT DISTINCT meal_id, SUM(CASE WHEN event ='bought' THEN 1 ELSE 0 END) as total_buys, SUM(CASE WHEN event='like'THEN 1 ELSE 0 END ) as total_likes, SUM(CASE WHEN event='share' THEN 1 ELSE 0 END ) as total_shares from events group by meal_id ORDER BY meal_id DESC;
+ meal_id | total_buys | total_likes | total_shares 
+---------+------------+-------------+--------------
+    1993 |        151 |         300 |          279
+    1992 |        150 |         280 |          334
+    1991 |        134 |         260 |          303
+    1990 |        143 |         293 |          318
+    1989 |        123 |         298 |          276
+    1988 |        138 |         266 |          289
+    1987 |        146 |         293 |          304
+    1986 |        121 |         230 |          221
+    1985 |        104 |         244 |          232
+    1984 |        110 |         195 |          225
+    1983 |        100 |         185 |          227
+    1982 |        105 |         225 |          230
+    1981 |         97 |         193 |          151
+    1980 |        102 |         174 |          150
+    1979 |         82 |         193 |          167
+    1978 |        104 |         186 |          158
+    1977 |         86 |         163 |          181
+    1976 |         60 |         138 |          167
+    1975 |         75 |         173 |          167
+    1974 |         74 |         106 |          124
+    1973 |         82 |         140 |          125
+readychef=# 
+readychef=# SELECT type, dt FROM meals ORDER by 1;
+    type    |     dt     
+------------+------------
+ chinese    | 2013-04-03
+ chinese    | 2013-06-13
+ chinese    | 2013-05-27
+ chinese    | 2013-10-12
+ chinese    | 2013-02-19
+ chinese    | 2013-08-18
+ chinese    | 2013-04-03
+ chinese    | 2013-09-07
+ chinese    | 2013-12-19
+ chinese    | 2013-02-01
+ chinese    | 2013-07-20
+ chinese    | 2013-10-11
+ chinese    | 2013-07-20
+ chinese    | 2013-11-17
+ chinese    | 2013-01-18
+ chinese    | 2013-10-11
+ chinese    | 2013-12-01
+ chinese    | 2013-07-20
+ chinese    | 2013-11-09
+ chinese    | 2013-09-09
+ chinese    | 2013-01-03
+readychef=# 
+readychef=# SELECT type, dt FROM meals ORDER by 1, 2;
+    type    |     dt     
+------------+------------
+ chinese    | 2013-01-01
+ chinese    | 2013-01-03
+ chinese    | 2013-01-04
+ chinese    | 2013-01-05
+ chinese    | 2013-01-05
+ chinese    | 2013-01-07
+ chinese    | 2013-01-09
+ chinese    | 2013-01-09
+ chinese    | 2013-01-16
+ chinese    | 2013-01-18
+ chinese    | 2013-01-24
+ chinese    | 2013-01-27
+ chinese    | 2013-01-28
+ chinese    | 2013-02-01
+ chinese    | 2013-02-01
+ chinese    | 2013-02-04
+ chinese    | 2013-02-04
+ chinese    | 2013-02-06
+ chinese    | 2013-02-07
+ chinese    | 2013-02-12
+ chinese    | 2013-02-12
+readychef=# 
+readychef=# 
+readychef=# select * from events limit 10;
+     dt     | userid | meal_id | event  
+------------+--------+---------+--------
+ 2013-01-01 |      3 |      18 | bought
+ 2013-01-01 |      7 |       1 | like
+ 2013-01-01 |     10 |      29 | bought
+ 2013-01-01 |     11 |      19 | share
+ 2013-01-01 |     15 |      33 | like
+ 2013-01-01 |     18 |       4 | share
+ 2013-01-01 |     18 |      40 | bought
+ 2013-01-01 |     21 |      10 | share
+ 2013-01-01 |     21 |       4 | like
+ 2013-01-01 |     22 |      23 | bought
+(10 rows)
+
+readychef=# select a.user_id, camapign_id, meal_id, event from users a join events b on a.user_id=b.user_id 
+readychef-# 
+readychef-# 
+readychef-# select a.user_id, camapign_id, meal_id, event from users a join events b on a.user_id=b.user_id ;
+ERROR:  syntax error at or near "select"
+LINE 2: select a.user_id, camapign_id, meal_id, event from users a j...
+        ^
+readychef=# select a.user_id, camapign_id, meal_id, event from users a join events b on a.user_id=b.user_id;
+ERROR:  column a.user_id does not exist
+LINE 1: ..._id, meal_id, event from users a join events b on a.user_id=...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "a.userid".
+readychef=# select user_id, camapign_id, meal_id, event from users a join events b on a.id=b.user_id;
+ERROR:  column a.id does not exist
+LINE 1: ..._id, meal_id, event from users a join events b on a.id=b.use...
+                                                             ^
+readychef=# select * from users limit 10 ;
+ userid |     dt     | campaign_id 
+--------+------------+-------------
+      1 | 2013-01-01 | RE
+      2 | 2013-01-01 | PI
+      3 | 2013-01-01 | FB
+      4 | 2013-01-01 | FB
+      5 | 2013-01-01 | FB
+      6 | 2013-01-01 | FB
+      7 | 2013-01-01 | PI
+      8 | 2013-01-01 | FB
+      9 | 2013-01-01 | FB
+     10 | 2013-01-01 | TW
+(10 rows)
+
+readychef=# select a.userid, camapign_id, meal_id, event from users a join events b on a.userid=b.userid;
+ERROR:  column "camapign_id" does not exist
+LINE 1: select a.userid, camapign_id, meal_id, event from users a jo...
+                         ^
+HINT:  Perhaps you meant to reference the column "a.campaign_id".
+readychef=# select a.userid, campaign_id, meal_id, event from users a join events b on a.userid=b.userid;
+ userid | campaign_id | meal_id | event  
+--------+-------------+---------+--------
+      3 | FB          |      18 | bought
+      7 | PI          |       1 | like
+     10 | TW          |      29 | bought
+     11 | RE          |      19 | share
+     15 | RE          |      33 | like
+     18 | TW          |       4 | share
+     18 | TW          |      40 | bought
+     21 | RE          |      10 | share
+     21 | RE          |       4 | like
+     22 | RE          |      23 | bought
+     25 | FB          |       8 | bought
+     27 | FB          |      29 | like
+     28 | TW          |      37 | share
+     28 | TW          |      18 | bought
+      5 | FB          |      43 | bought
+      8 | FB          |      40 | share
+      8 | FB          |      39 | bought
+     11 | RE          |      27 | share
+     20 | RE          |      11 | like
+     21 | RE          |      35 | share
+     21 | RE          |      36 | like
+readychef=# select a.userid, campaign_id, c.meal_id, type, price  from users a join events b on a.userid=b.userid join meals c on c.meal_id=b.meal_id;
+ userid | campaign_id | meal_id |    type    | price 
+--------+-------------+---------+------------+-------
+      3 | FB          |      18 | french     |     9
+      7 | PI          |       1 | french     |    10
+     10 | TW          |      29 | italian    |    15
+     11 | RE          |      19 | japanese   |    11
+     15 | RE          |      33 | vietnamese |    12
+     18 | TW          |       4 | italian    |     9
+     18 | TW          |      40 | japanese   |    13
+     21 | RE          |      10 | french     |     7
+     21 | RE          |       4 | italian    |     9
+     22 | RE          |      23 | mexican    |    12
+     25 | FB          |       8 | french     |    14
+     27 | FB          |      29 | italian    |    15
+     28 | TW          |      37 | chinese    |    13
+     28 | TW          |      18 | french     |     9
+      5 | FB          |      43 | italian    |    10
+      8 | FB          |      40 | japanese   |    13
+      8 | FB          |      39 | french     |    15
+     11 | RE          |      27 | italian    |    14
+     20 | RE          |      11 | italian    |     7
+     21 | RE          |      35 | italian    |     8
+     21 | RE          |      36 | french     |    11
+readychef=# 
+readychef=# select a.userid, campaign_id, c.meal_id, type, price  from users a join events b on a.userid=b.userid join meals c on c.meal_id=b.meal_id where event ='bought';
+ userid | campaign_id | meal_id |    type    | price 
+--------+-------------+---------+------------+-------
+      3 | FB          |      18 | french     |     9
+     10 | TW          |      29 | italian    |    15
+     18 | TW          |      40 | japanese   |    13
+     22 | RE          |      23 | mexican    |    12
+     25 | FB          |       8 | french     |    14
+     28 | TW          |      18 | french     |     9
+      5 | FB          |      43 | italian    |    10
+      8 | FB          |      39 | french     |    15
+     35 | RE          |      35 | italian    |     8
+      3 | FB          |      15 | italian    |    11
+     17 | FB          |      25 | chinese    |    11
+     21 | RE          |      44 | french     |    13
+     33 | FB          |      45 | mexican    |    10
+     47 | TW          |      11 | italian    |     7
+      5 | FB          |      29 | italian    |    15
+      8 | FB          |      46 | japanese   |     6
+     45 | PI          |      15 | italian    |    11
+     49 | FB          |      33 | vietnamese |    12
+     69 | FB          |      51 | italian    |    13
+      8 | FB          |      35 | italian    |     8
+      9 | FB          |      38 | french     |    12
+readychef=# select type, sum(case when event='bought' then 1 else 0 end) as num_of_bought_meals from users a join events b on a.userid=b.userid join meals c on c.meal_id=b.meal_id group by type;
+    type    | num_of_bought_meals 
+------------+---------------------
+ mexican    |                8792
+ french     |               16179
+ japanese   |                6921
+ italian    |               22575
+ chinese    |                6267
+ vietnamese |                3535
+(6 rows)
+
+readychef=# select meal_id from (select avg(price) as avg_price from meals) a where price>avg_price;\
+ERROR:  column "meal_id" does not exist
+LINE 1: select meal_id from (select avg(price) as avg_price from mea...
+               ^
+Invalid command \. Try \? for help.
+readychef=# select meal_id from (select avg(price) as avg_price from meals) a where price>avg_price;
+ERROR:  column "meal_id" does not exist
+LINE 1: select meal_id from (select avg(price) as avg_price from mea...
+               ^
+readychef=# select meal_id from meals  where price>(select avg(price) as avg_price from melas) a;
+ERROR:  syntax error at or near "a"
+LINE 1: ...  where price>(select avg(price) as avg_price from melas) a;
+                                                                     ^
+readychef=# select meal_id from meals  where price>(select avg(price) as avg_price from melas) ;
+ERROR:  relation "melas" does not exist
+LINE 1: ...s  where price>(select avg(price) as avg_price from melas) ;
+                                                               ^
+readychef=# select meal_id from meals  where price>(select avg(price) as avg_price from mereadychef=# select meal_id from meals  where price>(select avg(price) as avg_price from meals) ;
+ meal_id 
+---------
+       2
+       5
+       8
+       9
+      12
+      15
+      16
+      17
+      19
+      21
+      22
+      23
+      24
+      25
+      27
+      29
+      31
+      33
+      34
+      36
+      37
+      38
+      39
+      40
+      44
+      47
+      49
+      51
+      52
+      54
+      55
+      56
+      61
+      64
+      65
+      66
+      69
+      70
+      72
+      75
+      76
+      77
+      79
+      80
+      83
+      85
+      86
+readychef=# select distinct  type,  meal_id from meals a join (select distinct type, avg(price) from meals group by type) b on a.type=b.type  where price> avg_price;
+ERROR:  column reference "type" is ambiguous
+LINE 1: select distinct  type,  meal_id from meals a join (select di...
+                         ^
+readychef=# select distinct  a.type,  meal_id from meals a join (select distinct type, avg(price) from meals group by type) b on a.type=b.type  where price> avg_price;
+ERROR:  column "avg_price" does not exist
+LINE 1: ...s group by type) b on a.type=b.type  where price> avg_price;
+                                                             ^
+readychef=# select distinct  a.type,  meal_id from meals a join (select distinct type, avg(price) as avg_price from meals group by type) b on a.type=b.type  where price> avg_price;
+    type    | meal_id 
+------------+---------
+ french     |     638
+ french     |     758
+ italian    |    1198
+ vietnamese |     481
+ mexican    |    1663
+ italian    |     605
+ french     |    1202
+ french     |    1644
+ chinese    |    1746
+ japanese   |     270
+ french     |    1517
+ italian    |     831
+ italian    |     632
+ chinese    |    1820
+ french     |     803
+ french     |    1343
+ mexican    |     494
+ italian    |     205
+ vietnamese |     794
+ italian    |    1907
+ chinese    |     852
+ mexican    |     652
+ italian    |    1367
+ italian    |     750
+ vietnamese |    1068
+ italian    |     604
+ mexican    |     565
+ italian    |     691
+ french     |     941
+ french     |    1448
+ french     |     736
+ mexican    |     603
+ japanese   |     664
+ italian    |     669
+ french     |    1629
+ vietnamese |    1641
+ chinese    |     606
+ italian    |     991
+ french     |    1157
+ chinese    |    1167
+ italian    |    1906
+ mexican    |    1022
+ mexican    |      85
+ french     |     535
+ chinese    |    1080
+ mexican    |    1798
+ italian    |    1151
+readychef=# 
+readychef=# select distinct  a.type, count( meal_id) as num_meals from meals a join (select distinct type, avg(price) as avg_price from meals group by type) b on a.type=b.type group by a.type where price> avg_price;
+ERROR:  syntax error at or near "where"
+LINE 1: ...group by type) b on a.type=b.type group by a.type where pric...
+                                                             ^
+readychef=# select distinct  a.type, count( meal_id) as num_meals from meals a join (select distinct type, avg(price) as avg_price from meals group by type) b on a.type=b.type where price> avg_price group by a.type;
+    type    | num_meals 
+------------+-----------
+ chinese    |        95
+ french     |       243
+ italian    |       332
+ japanese   |        99
+ mexican    |       152
+ vietnamese |        47
+(6 rows)
+
+readychef=# select * from events limit 10;
+     dt     | userid | meal_id | event  
+------------+--------+---------+--------
+ 2013-01-01 |      3 |      18 | bought
+ 2013-01-01 |      7 |       1 | like
+ 2013-01-01 |     10 |      29 | bought
+ 2013-01-01 |     11 |      19 | share
+ 2013-01-01 |     15 |      33 | like
+ 2013-01-01 |     18 |       4 | share
+ 2013-01-01 |     18 |      40 | bought
+ 2013-01-01 |     21 |      10 | share
+ 2013-01-01 |     21 |       4 | like
+ 2013-01-01 |     22 |      23 | bought
+(10 rows)
+
+readychef=# select distinct campaign_id, 1.00*count(userid)/(select count(userid) from users) from users group by campaign_id ;
+ campaign_id |        ?column?        
+-------------+------------------------
+ FB          | 0.39681390296886314265
+ PI          | 0.10644460535843591600
+ RE          | 0.15604634322954380883
+ TW          | 0.34069514844315713251
+(4 rows)
+
+readychef=# select distinct campaign_id, 1.00*count(userid)/(select count(userid) from users) as percent from users group by campaign_id ;
+ campaign_id |        percent         
+-------------+------------------------
+ FB          | 0.39681390296886314265
+ PI          | 0.10644460535843591600
+ RE          | 0.15604634322954380883
+ TW          | 0.34069514844315713251
+(4 rows)
+
+readychef=# select campaign_id, count(bought_events)as total_buys from users a join (select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id) d on a.campaign_id=b.campaign_idorder by count(bought_events) DESC ;
+ERROR:  syntax error at or near "by"
+LINE 1: ...ampaign_id) d on a.campaign_id=b.campaign_idorder by count(b...
+                                                             ^
+readychef=# select campaign_id, count(bought_events)as total_buys from users a join (select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id) d on a.campaign_id=b.campaign_id order by count(bought_events) DESC ;
+ERROR:  missing FROM-clause entry for table "b"
+LINE 1: ...b.userid group by campaign_id) d on a.campaign_id=b.campaign...
+                                                             ^
+readychef=# select campaign_id, count(bought_events)as total_buys from users a join (select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id) d on a.campaign_id=d.campaign_id order by count(bought_events) DESC ;
+ERROR:  column reference "campaign_id" is ambiguous
+LINE 1: select campaign_id, count(bought_events)as total_buys from u...
+               ^
+readychef=# select a.campaign_id, count(bought_events)as total_buys from users a join (select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id) d on a.campaign_id=d.campaign_id order by count(bought_events) DESC ;
+ERROR:  column "a.campaign_id" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select a.campaign_id, count(bought_events)as total_buys from...
+               ^
+readychef=# select a.campaign_id, count(bought_events)as total_buys from users a join (select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id) d on a.campaign_id=d.campaign_id group by a.campaign_id order by count(bought_events) DESC ;
+ campaign_id | total_buys 
+-------------+------------
+ FB          |       2192
+ TW          |       1882
+ RE          |        862
+ PI          |        588
+(4 rows)
+
+readychef=# select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id
+readychef-# select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id;
+ERROR:  syntax error at or near "select"
+LINE 2: select campaign_id, sum(case when event ='bought' then 1 els...
+        ^
+readychef=# select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id
+readychef-# select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id                                                                                              select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id;
+ERROR:  syntax error at or near "select"
+LINE 2: select campaign_id, sum(case when event ='bought' then 1 els...
+        ^
+readychef=# select campaign_id, sum(case when event ='bought' then 1 else 0 end ) as bought_events from events b, users c where c.userid=b.userid group by campaign_id;
+ campaign_id | bought_events 
+-------------+---------------
+ RE          |         10088
+ FB          |         25299
+ TW          |         22439
+ PI          |          6443
+(4 rows)
+
+readychef=# select * from users limit10;
+ userid |     dt     | campaign_id 
+--------+------------+-------------
+      1 | 2013-01-01 | RE
+      2 | 2013-01-01 | PI
+      3 | 2013-01-01 | FB
+      4 | 2013-01-01 | FB
+      5 | 2013-01-01 | FB
+      6 | 2013-01-01 | FB
+      7 | 2013-01-01 | PI
+      8 | 2013-01-01 | FB
+      9 | 2013-01-01 | FB
+     10 | 2013-01-01 | TW
+     11 | 2013-01-01 | RE
+     12 | 2013-01-01 | FB
+     13 | 2013-01-01 | TW
+     14 | 2013-01-01 | TW
+     15 | 2013-01-01 | RE
+     16 | 2013-01-01 | TW
+     17 | 2013-01-01 | FB
+     18 | 2013-01-01 | TW
+     19 | 2013-01-01 | FB
+     20 | 2013-01-01 | RE
+     21 | 2013-01-01 | RE
+     22 | 2013-01-01 | RE
+     23 | 2013-01-01 | TW
+     24 | 2013-01-01 | FB
+     25 | 2013-01-01 | FB
+     26 | 2013-01-01 | TW
+     27 | 2013-01-01 | FB
+     28 | 2013-01-01 | TW
+     29 | 2013-01-01 | TW
+     30 | 2013-01-01 | TW
+     31 | 2013-01-02 | RE
+     32 | 2013-01-02 | RE
+     33 | 2013-01-02 | FB
+     34 | 2013-01-02 | RE
+     35 | 2013-01-02 | RE
+     36 | 2013-01-02 | TW
+     37 | 2013-01-02 | RE
+     38 | 2013-01-02 | TW
+     39 | 2013-01-02 | TW
+     40 | 2013-01-02 | FB
+     41 | 2013-01-02 | FB
+     42 | 2013-01-02 | TW
+     43 | 2013-01-02 | TW
+     44 | 2013-01-03 | FB
+     45 | 2013-01-03 | PI
+     46 | 2013-01-03 | FB
+     47 | 2013-01-03 | TW
+     48 | 2013-01-03 | FB
+     49 | 2013-01-03 | FB
+     50 | 2013-01-03 | FB
+     51 | 2013-01-03 | FB
+     52 | 2013-01-03 | TW
+readychef=# select distinct dt , count(userid) as num_users_per_day from users group  by dt 
+readychef-# select distinct dt , count(userid) as num_users_per_day from users group  by dt ;
+ERROR:  syntax error at or near "select"
+LINE 2: select distinct dt , count(userid) as num_users_per_day from...
+        ^
+readychef=# select distinct dt , count(userid) as num_users_per_day from users group  by dt;
+     dt     | num_users_per_day 
+------------+-------------------
+ 2013-06-22 |                 8
+ 2013-06-29 |                30
+ 2013-08-31 |                27
+ 2013-06-07 |                22
+ 2013-07-08 |                 3
+ 2013-08-12 |                 2
+ 2013-10-03 |                14
+ 2013-07-02 |                27
+ 2013-08-25 |                19
+ 2013-08-28 |                23
+ 2013-03-13 |                20
+ 2013-04-24 |                28
+ 2013-08-26 |                21
+ 2013-01-20 |                13
+ 2013-11-09 |                11
+ 2013-11-25 |                10
+ 2013-10-06 |                19
+ 2013-12-22 |                23
+ 2013-11-12 |                 8
+ 2013-10-25 |                 6
+ 2013-05-07 |                25
+ 2013-04-22 |                29
+ 2013-12-25 |                 1
+ 2013-07-29 |                 3
+ 2013-05-30 |                23
+ 2013-08-21 |                 1
+ 2013-12-17 |                16
+ 2013-02-28 |                30
+ 2013-09-15 |                 7
+ 2013-05-17 |                26
+ 2013-12-01 |                23
+ 2013-09-02 |                14
+ 2013-05-16 |                24
+ 2013-07-10 |                 7
+ 2013-02-15 |                11
+ 2013-06-10 |                11
+ 2013-07-17 |                26
+ 2013-01-13 |                23
+ 2013-08-03 |                30
+ 2013-09-09 |                17
+ 2013-06-02 |                 6
+ 2013-06-21 |                 8
+ 2013-11-15 |                12
+ 2013-03-23 |                 4
+ 2013-02-06 |                 1
+ 2013-09-23 |                27
+ 2013-02-14 |                14
+ 2013-06-13 |                25
+ 2013-06-30 |                17
+ 2013-09-01 |                29
+ 2013-04-27 |                 1
+ 2013-10-18 |                25
+readychef=# 
+readychef=# select date_part('week', dt) from users limit 10;
+ date_part 
+-----------
+         1
+         1
+         1
+         1
+         1
+         1
+         1
+         1
+         1
+         1
+(10 rows)
+
+readychef=# select to_char(dt, 'day') from users limit 10;
+  to_char  
+-----------
+ tuesday  
+ tuesday  
+ tuesday  
+ tuesday  
+ tuesday  
+ tuesday  
+ tuesday  
+ tuesday  
+ tuesday  
+ tuesday  
+(10 rows)
+
+readychef=# select distinct to_char(dt, 'day') as week_of_day, sum(case when event='bought' then  1 else 0 end) as total_bought from events;
+ERROR:  column "events.dt" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select distinct to_char(dt, 'day') as week_of_day, sum(case ...
+                                ^
+readychef=# select distinct to_char(dt, 'day') as week_of_day, sum(case when event='bought' then  1 else 0 end) as total_bought from events group by to_char(dt, 'day');
+ week_of_day | total_bought 
+-------------+--------------
+ friday      |         9146
+ monday      |         9413
+ saturday    |         9203
+ sunday      |         9292
+ thursday    |         8948
+ tuesday     |         9309
+ wednesday   |         8958
+(7 rows)
+
+readychef=# select distinct to_char(dt, 'day') as week_of_day, sum(case when event='bought' then  1 else 0 end) as total_bought from events group by to_char(dt, 'day') order by  sum(case when event='bought' then  1 else 0 end) DESC;
+ week_of_day | total_bought 
+-------------+--------------
+ monday      |         9413
+ tuesday     |         9309
+ sunday      |         9292
+ saturday    |         9203
+ friday      |         9146
+ wednesday   |         8958
+ thursday    |         8948
+(7 rows)
+
+readychef=# select * from visits limit 10;
+     dt     | userid 
+------------+--------
+ 2013-01-01 |      3
+ 2013-01-01 |      7
+ 2013-01-01 |      8
+ 2013-01-01 |     10
+ 2013-01-01 |     11
+ 2013-01-01 |     15
+ 2013-01-01 |     18
+ 2013-01-01 |     19
+ 2013-01-01 |     20
+ 2013-01-01 |     21
+(10 rows)
+
+readychef=# select date_part('month',a.dt ) as month, count(b.userid) as num_users from  visits a, events b where event='bought' and a.userid=b.userid and date_part('month',a.dt) =date_part('month', b.dt) group by date_part('month', a.dt) order by count(b.userid) desc;
+ month | num_users 
+-------+-----------
+    12 |    210118
+    11 |    182521
+    10 |    170406
+     9 |    149895
+     8 |    142263
+     7 |    124025
+     6 |     98548
+     5 |     88121
+     4 |     59502
+     3 |     42947
+     2 |     18079
+     1 |      8378
+(12 rows)
+
+readychef=# select datediff(dt, getdate()) from users limit 10;
+ERROR:  function getdate() does not exist
+LINE 1: select datediff(dt, getdate()) from users limit 10;
+                            ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+readychef=# select today() 
+readychef-# select today();
+ERROR:  syntax error at or near "select"
+LINE 2: select today();
+        ^
+readychef=# select Today();
+ERROR:  function today() does not exist
+LINE 1: select Today();
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+readychef=# select Today;
+ERROR:  column "today" does not exist
+LINE 1: select Today;
+               ^
+readychef=# select now();
+              now              
+-------------------------------
+ 2017-01-18 14:12:18.973575-08
+(1 row)
+
+readychef=# select datediff(dt, now()) from users limit 10;
+ERROR:  function datediff(date, timestamp with time zone) does not exist
+LINE 1: select datediff(dt, now()) from users limit 10;
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+readychef=# select datediff(dd,dt, now()) from users limit 10;
+ERROR:  column "dd" does not exist
+LINE 1: select datediff(dd,dt, now()) from users limit 10;
+                        ^
+HINT:  Perhaps you meant to reference the column "users.dt".
+readychef=# select date_part('day', now()-dt) from users;
+ date_part 
+-----------
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1478
+      1477
+      1477
+      1477
+      1477
+      1477
+      1477
+      1477
+      1477
+      1477
+      1477
+      1477
+      1477
+      1477
+      1476
+      1476
+      1476
+      1476
+      1476
+      1476
+      1476
+      1476
+      1476
+readychef=# select date_part('day', now()::date -dt) from users;
+ERROR:  function date_part(unknown, integer) does not exist
+LINE 1: select date_part('day', now()::date -dt) from users;
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+readychef=# select  now()::date -dt from users;
+ ?column? 
+----------
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1477
+     1477
+     1477
+     1477
+     1477
+     1477
+     1477
+     1477
+     1477
+     1477
+     1477
+     1477
+     1477
+     1476
+     1476
+     1476
+     1476
+     1476
+     1476
+     1476
+     1476
+     1476
+readychef=# select now()::date 
+readychef-# select  now()::date ;
+ERROR:  syntax error at or near "select"
+LINE 2: select  now()::date ;
+        ^
+readychef=# select now() 
+readychef-# select now();
+ERROR:  syntax error at or near "select"
+LINE 2: select now();
+        ^
+readychef=# select now()::date- dt from users limit 10;
+ ?column? 
+----------
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+(10 rows)
+
+readychef=# select now()::date
+readychef-# select now()::date;
+ERROR:  syntax error at or near "select"
+LINE 2: select now()::date;
+        ^
+readychef=# select now():date 
+readychef-# ;
+ERROR:  syntax error at or near ":"
+LINE 1: select now():date
+                    ^
+readychef=# select now()::date;
+    now     
+------------
+ 2017-01-18
+(1 row)
+
+readychef=# select date_part(dd, now()::date-dt) from users limit 10;
+ERROR:  column "dd" does not exist
+LINE 1: select date_part(dd, now()::date-dt) from users limit 10;
+                         ^
+HINT:  Perhaps you meant to reference the column "users.dt".
+readychef=# select date_part('day', now()::date-dt) from users limit 10;
+ERROR:  function date_part(unknown, integer) does not exist
+LINE 1: select date_part('day', now()::date-dt) from users limit 10;
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+readychef=# select cast( now()::date as date) -cast(dt as date) from users limit 10;
+ ?column? 
+----------
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+     1478
+(10 rows)
+
+readychef=# select meal_id  where price>(select avg(price ) from meals) and cast( now()::date as date) -cast(dt as date)<=7;
+ERROR:  column "meal_id" does not exist
+LINE 1: select meal_id  where price>(select avg(price ) from meals) ...
+               ^
+readychef=# select meal_id from meals where price>(select avg(price ) from meals) and cast( now()::date as date) -cast(dt as date)<=7;
+ meal_id 
+---------
+(0 rows)
+
+readychef=# select meal_id from meals where price>(select avg(price ) from meals) 
+readychef-# ;
+ meal_id 
+---------
+       2
+       5
+       8
+       9
+      12
+      15
+      16
+      17
+      19
+      21
+      22
+      23
+      24
+      25
+      27
+      29
+      31
+      33
+      34
+      36
+      37
+      38
+      39
+      40
+      44
+      47
+      49
+      51
+      52
+      54
+      55
+      56
+      61
+      64
+      65
+      66
+      69
+      70
+      72
+      75
+      76
+      77
+      79
+      80
+      83
+      85
+      86
+      87
+      89
+      90
+      91
+      93
+readychef=# 
+readychef=# select meal_id from meals where price>(select avg(price ) from meals where dt>= cast(now()as date) -7 );
+ meal_id 
+---------
+(0 rows)
+
+readychef=# select count(a.userid)/(select sum(userid) from users) as percent from users a, (select userid, sum(case when event='like' then 1 else 0 end ) as total_likes, sum(case when event='share' then 1 else 0 end ) as total_shares from event) c  where  a.userid=c.userid where total_share>total_likes 
+readychef-# ;
+ERROR:  syntax error at or near "where"
+LINE 1: ...al_shares from event) c  where  a.userid=c.userid where tota...
+                                                             ^
+readychef=# select count(a.userid)/(select sum(userid) from users) as percent from users a, (select userid, sum(case when event='like' then 1 else 0 end ) as total_likes, sum(case when event='share' then 1 else 0 end ) as total_shares from events) c  where  a.userid=c.userid and total_share>total_likes
+readychef-# ;
+ERROR:  column "events.userid" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: ...rid) from users) as percent from users a, (select userid, su...
+                                                             ^
+readychef=# select count(a.userid)/(select count(userid) from users) as percent from users a, (select userid, sum(case when event='like' then 1 else 0 end ) as total_likes, ERROR:  column "events.userid" must appear in the GROUP BY clause or be used in an aggregate functionrid and total_share>total_likes;
+LINE 1: ...rid) from users) as percent from users a, (select userid, su...
+                                                             ^
+readychef=# select count(a.userid)/(select count(userid) from users) as percent from users a, (select userid, sum(case when event='like' then 1 else 0 end ) as total_likes, sum(case when event='share' then 1 else 0 end ) as total_shares from events group by userid) c  where  a.userid=c.userid and total_share>total_likes;
+ERROR:  column "total_share" does not exist
+LINE 1: ... group by userid) c  where  a.userid=c.userid and total_shar...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "c.total_shares".
+readychef=# select count(a.userid)/(select count(userid) from users) as percent from users a, (select userid, sum(case when event='like' then 1 else 0 end ) as total_likes, sum(case when event='share' then 1 else 0 end ) as total_shares from events group by userid) c  where  a.userid=c.userid and c.total_share>c.total_likes;
+ERROR:  column c.total_share does not exist
+LINE 1: ... group by userid) c  where  a.userid=c.userid and c.total_sh...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "c.total_shares".
+readychef=# select count(a.userid)/(select count(userid) from users) as percent from users a, (select userid, sum(case when event='like' then 1 else 0 end ) as total_likes, sum(case when event='share' then 1 else 0 end ) as total_shares from events group by userid) c  where  a.userid=c.userid and c.total_shares>c.total_likes;
+ percent 
+---------
+       0
+(1 row)
+
+readychef=# selec dt, count(a.userid) as num_users from visits  a left join events b on  a.dt=b.dt  and a.userid=b.userid where b.userid is null 
+readychef-# ;
+ERROR:  syntax error at or near "selec"
+LINE 1: selec dt, count(a.userid) as num_users from visits  a left j...
+        ^
+readychef=# select dt, count(a.userid) as num_users from visits  a left join events b on  a.dt=b.dt  and a.userid=b.userid where b.userid is null                            ;
+ERROR:  column reference "dt" is ambiguous
+LINE 1: select dt, count(a.userid) as num_users from visits  a left ...
+               ^
+readychef=# select a.dt, count(a.userid) as num_users from visits  a left join events b on  a.dt=b.dt  and a.userid=b.userid where b.userid is null                          ;
+ERROR:  column "a.dt" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: select a.dt, count(a.userid) as num_users from visits  a lef...
+               ^
+readychef=# select a.dt, count(a.userid) as num_users from visits  a left join events b on  a.dt=b.dt  and a.userid=b.userid where b.userid is null group by a.dt; 
+     dt     | num_users 
+------------+-----------
+ 2013-01-01 |         6
+ 2013-01-02 |         7
+ 2013-01-03 |        19
+ 2013-01-04 |        17
+ 2013-01-05 |        29
+ 2013-01-06 |        31
+ 2013-01-07 |        37
+ 2013-01-08 |        48
+ 2013-01-09 |        43
+ 2013-01-10 |        42
+ 2013-01-11 |        58
+ 2013-01-12 |        52
+ 2013-01-13 |        65
+ 2013-01-14 |        69
+ 2013-01-15 |        83
+ 2013-01-16 |        80
+ 2013-01-17 |        79
+ 2013-01-18 |        72
+ 2013-01-19 |        86
+ 2013-01-20 |        83
+ 2013-01-21 |        98
+ 2013-01-22 |        91
+ 2013-01-23 |        92
+ 2013-01-24 |       101
+ 2013-01-25 |       103
+ 2013-01-26 |       111
+ 2013-01-27 |       113
+ 2013-01-28 |       103
+ 2013-01-29 |       104
+ 2013-01-30 |       110
+ 2013-01-31 |       106
+ 2013-02-01 |       109
+ 2013-02-02 |       124
+ 2013-02-03 |       120
+ 2013-02-04 |       128
+ 2013-02-05 |       133
+ 2013-02-06 |       110
+ 2013-02-07 |       142
+ 2013-02-08 |       125
+ 2013-02-09 |       135
+ 2013-02-10 |       124
+ 2013-02-11 |       128
+ 2013-02-12 |       134
+ 2013-02-13 |       139
+ 2013-02-14 |       147
+ 2013-02-15 |       154
+ 2013-02-16 |       155
+ 2013-02-17 |       149
+ 2013-02-18 |       164
+ 2013-02-19 |       175
+ 2013-02-20 |       167
+ 2013-02-21 |       176
+ 2013-02-22 |       184
+readychef=# 
+readychef=# with overall_list as (select dt, count(userid) from users)  
+readychef-# ;
+ERROR:  syntax error at or near ";"
+LINE 2: ;
+        ^
+readychef=# with overall_list as (select dt, count(userid) from users);                                                                                                      ERROR:  syntax error at or near ";"
+LINE 1: with overall_list as (select dt, count(userid) from users);
+                                                                  ^
+readychef=# with overall_list as (select dt, count(userid) from users)
+readychef-# select * from overall_list 
+readychef-# ;
+ERROR:  column "users.dt" must appear in the GROUP BY clause or be used in an aggregate function
+LINE 1: with overall_list as (select dt, count(userid) from users)
+                                     ^
+readychef=# with overall_list as (select dt, count(userid) from users group by dt);
+ERROR:  syntax error at or near ";"
+LINE 1: ...l_list as (select dt, count(userid) from users group by dt);
+                                                                      ^
+readychef=# with overall_list as (select dt, count(userid) from users group by dt)
+readychef-# select * from overall_list;
+     dt     | count 
+------------+-------
+ 2013-06-22 |     8
+ 2013-05-06 |     2
+ 2013-04-09 |    29
+ 2013-03-25 |    21
+ 2013-05-23 |     5
+ 2013-06-20 |    10
+ 2013-02-28 |    30
+ 2013-03-29 |    12
+ 2013-10-18 |    25
+ 2013-01-28 |     4
+ 2013-08-30 |     5
+ 2013-12-08 |    12
+ 2013-03-14 |     6
+ 2013-10-05 |     6
+ 2013-12-20 |    25
+ 2013-04-16 |    11
+ 2013-08-29 |    17
+ 2013-08-27 |     5
+ 2013-10-22 |    13
+ 2013-05-20 |     7
+ 2013-09-11 |     5
+ 2013-04-24 |    28
+ 2013-09-23 |    27
+ 2013-03-06 |    26
+ 2013-03-05 |    15
+ 2013-10-10 |    14
+ 2013-04-28 |    13
+ 2013-04-11 |    11
+ 2013-04-20 |    24
+ 2013-05-26 |    28
+ 2013-06-05 |     6
+ 2013-09-10 |    11
+ 2013-06-28 |    23
+ 2013-07-09 |     5
+ 2013-12-26 |     3
+ 2013-07-19 |    19
+ 2013-02-20 |    14
+ 2013-04-03 |    15
+ 2013-02-09 |     1
+ 2013-03-20 |    19
+ 2013-05-07 |    25
+ 2013-06-17 |    19
+ 2013-08-03 |    30
+ 2013-07-24 |    14
+ 2013-02-19 |     7
+ 2013-08-13 |     6
+ 2013-05-31 |    15
+ 2013-05-19 |     1
+ 2013-12-06 |    29
+ 2013-05-17 |    26
+ 2013-09-05 |    25
+ 2013-12-24 |    23
+ 2013-10-07 |    28
+readychef=# 
+readychef=# select distinct dt from (select dt, price where price> (select avg(price) from meals) ) 
+readychef-# ;
+ERROR:  subquery in FROM must have an alias
+LINE 1: select distinct dt from (select dt, price where price> (sele...
+                                ^
+HINT:  For example, FROM (SELECT ...) [AS] foo.
+readychef=# select distinct dt from (select dt, price where price> (select avg(price) from meals)) ;
+ERROR:  subquery in FROM must have an alias
+LINE 1: select distinct dt from (select dt, price where price> (sele...
+                                ^
+HINT:  For example, FROM (SELECT ...) [AS] foo.
+readychef=# with overall_list as (select dt, price where price> (select avg(price) from meals)) 
+readychef-# select distinct dt from overall_list;
+ERROR:  column "dt" does not exist
+LINE 1: with overall_list as (select dt, price where price> (select ...
+                                     ^
+readychef=# select distinct dt from (select dt, price from meals where price> (select avg(price) from meals)) ;                                                              
+ERROR:  subquery in FROM must have an alias
+LINE 1: select distinct dt from (select dt, price from meals where p...
+                                ^
+HINT:  For example, FROM (SELECT ...) [AS] foo.
+readychef=# select * from meals limit 10;
+ meal_id |  type   |     dt     | price 
+---------+---------+------------+-------
+       1 | french  | 2013-01-01 |    10
+       2 | chinese | 2013-01-01 |    13
+       3 | mexican | 2013-01-02 |     9
+       4 | italian | 2013-01-03 |     9
+       5 | chinese | 2013-01-03 |    12
+       6 | italian | 2013-01-03 |     9
+       7 | italian | 2013-01-03 |    10
+       8 | french  | 2013-01-03 |    14
+       9 | italian | 2013-01-03 |    13
+      10 | french  | 2013-01-03 |     7
+(10 rows)
+
+readychef=# select dt, price where price> (select avg(price) from meals)
+readychef-# ;
+ERROR:  column "dt" does not exist
+LINE 1: select dt, price where price> (select avg(price) from meals)
+               ^
+readychef=# select dt, price from meals where price> (select avg(price) from meals);
+     dt     | price 
+------------+-------
+ 2013-01-01 |    13
+ 2013-01-03 |    12
+ 2013-01-03 |    14
+ 2013-01-03 |    13
+ 2013-01-03 |    12
+ 2013-01-04 |    11
+ 2013-01-04 |    15
+ 2013-01-04 |    15
+ 2013-01-04 |    11
+ 2013-01-04 |    12
+ 2013-01-04 |    12
+ 2013-01-04 |    12
+ 2013-01-05 |    11
+ 2013-01-05 |    11
+ 2013-01-05 |    14
+ 2013-01-05 |    15
+ 2013-01-05 |    15
+ 2013-01-06 |    12
+ 2013-01-07 |    16
+ 2013-01-07 |    11
+ 2013-01-07 |    13
+ 2013-01-07 |    12
+ 2013-01-07 |    15
+ 2013-01-07 |    13
+ 2013-01-08 |    13
+ 2013-01-09 |    13
+ 2013-01-09 |    12
+ 2013-01-10 |    13
+ 2013-01-10 |    11
+ 2013-01-11 |    14
+ 2013-01-11 |    13
+ 2013-01-11 |    13
+ 2013-01-12 |    13
+ 2013-01-12 |    15
+ 2013-01-12 |    11
+ 2013-01-12 |    13
+ 2013-01-14 |    13
+ 2013-01-14 |    12
+ 2013-01-14 |    16
+ 2013-01-15 |    11
+ 2013-01-15 |    13
+ 2013-01-15 |    13
+ 2013-01-15 |    13
+ 2013-01-16 |    11
+ 2013-01-16 |    11
+ 2013-01-16 |    12
+ 2013-01-16 |    12
+ 2013-01-16 |    11
+ 2013-01-17 |    16
+ 2013-01-17 |    11
+ 2013-01-17 |    13
+ 2013-01-17 |    11
+ 2013-01-17 |    11
+readychef=# select distinct dt  from  (select dt, price from meals where price> (select avg(price) from meals)) ;
+ERROR:  subquery in FROM must have an alias
+LINE 1: select distinct dt  from  (select dt, price from meals where...
+                                  ^
+HINT:  For example, FROM (SELECT ...) [AS] foo.
+readychef=# with overall_list as (select dt, price from meals where price> (select avg(price) from meals))
+readychef-# select dt from overall_list 
+readychef-# ;
+     dt     
+------------
+ 2013-01-01
+ 2013-01-03
+ 2013-01-03
+ 2013-01-03
+ 2013-01-03
+ 2013-01-04
+ 2013-01-04
+ 2013-01-04
+ 2013-01-04
+ 2013-01-04
+ 2013-01-04
+ 2013-01-04
+ 2013-01-05
+ 2013-01-05
+ 2013-01-05
+ 2013-01-05
+ 2013-01-05
+ 2013-01-06
+ 2013-01-07
+ 2013-01-07
+ 2013-01-07
+ 2013-01-07
+ 2013-01-07
+ 2013-01-07
+ 2013-01-08
+ 2013-01-09
+ 2013-01-09
+ 2013-01-10
+ 2013-01-10
+ 2013-01-11
+ 2013-01-11
+ 2013-01-11
+ 2013-01-12
+ 2013-01-12
+ 2013-01-12
+ 2013-01-12
+ 2013-01-14
+ 2013-01-14
+ 2013-01-14
+ 2013-01-15
+ 2013-01-15
+ 2013-01-15
+ 2013-01-15
+ 2013-01-16
+ 2013-01-16
+ 2013-01-16
+ 2013-01-16
+ 2013-01-16
+ 2013-01-17
+ 2013-01-17
+ 2013-01-17
+ 2013-01-17
+ 2013-01-17
+readychef=# with overall_list as (select dt, price from meals where price> (select avg(price) from meals))                                                                   select distinct dt from overall_list;                                                                                                                                        
+     dt     
+------------
+ 2013-06-22
+ 2013-07-06
+ 2013-05-06
+ 2013-04-09
+ 2013-06-20
+ 2013-02-28
+ 2013-03-29
+ 2013-10-18
+ 2013-01-28
+ 2013-08-30
+ 2013-12-08
+ 2013-03-14
+ 2013-10-05
+ 2013-12-20
+ 2013-04-16
+ 2013-08-29
+ 2013-08-27
+ 2013-10-22
+ 2013-05-20
+ 2013-09-11
+ 2013-04-24
+ 2013-09-23
+ 2013-03-06
+ 2013-03-05
+ 2013-10-10
+ 2013-04-28
+ 2013-04-11
+ 2013-06-05
+ 2013-09-10
+ 2013-06-28
+ 2013-07-09
+ 2013-07-19
+ 2013-04-03
+ 2013-02-09
+ 2013-03-20
+ 2013-05-07
+ 2013-06-17
+ 2013-08-03
+ 2013-02-19
+ 2013-08-13
+ 2013-05-31
+ 2013-05-19
+ 2013-12-06
+ 2013-05-17
+ 2013-09-05
+ 2013-12-24
+ 2013-10-07
+ 2013-10-17
+ 2013-10-28
+ 2013-12-02
+ 2013-11-15
+ 2013-11-23
+ 2013-11-14
+readychef=# 
+readychef=# 
+readychef=# with min_event_dt as (select distinct userid, min(dt) as min_event_date from events group by userid) 
+readychef-# with bought_event_dt as (select distinct userid, min(dt) as min_bought_date from events where event ='bought' group by userid) 
+readychef-# select distinct a.userid from min_event_dt a,  bought_event_dt b where a.userid=b.userid and b.dt<=a.dt;
+ERROR:  syntax error at or near "with"
+LINE 2: with bought_event_dt as (select distinct userid, min(dt) as ...
+        ^
+readychef=# 
